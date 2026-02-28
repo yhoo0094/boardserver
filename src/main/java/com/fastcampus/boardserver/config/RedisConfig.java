@@ -55,8 +55,8 @@ public class RedisConfig {
                                                ObjectMapper objectMapper) {
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig()
                 .disableCachingNullValues()
-                .entryTtl(Duration.ofSeconds(defaultExpireSecond))
-                .serializeKeysWith(RedisSerializationContext
+                .entryTtl(Duration.ofSeconds(defaultExpireSecond))  //만료시간
+                .serializeKeysWith(RedisSerializationContext        //직렬화
                         .SerializationPair
                         .fromSerializer(new StringRedisSerializer())).serializeValuesWith(RedisSerializationContext.SerializationPair
                         .fromSerializer(new GenericJackson2JsonRedisSerializer(objectMapper)));

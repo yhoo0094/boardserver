@@ -23,8 +23,6 @@ public class PostSearchController {
 
     @GetMapping
     public PostSearchResponse search(PostDTO postDTO, CategoryDTO categoryDTO) {
-        log.info("PostSearchResponse.search 실행");
-
         List<PostDTO> postDTOList = postSearchService.getProducts(postDTO,categoryDTO);
         return new PostSearchResponse(postDTOList);
     }

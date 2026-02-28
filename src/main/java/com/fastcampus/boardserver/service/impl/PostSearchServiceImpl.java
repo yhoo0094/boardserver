@@ -21,8 +21,6 @@ public class PostSearchServiceImpl implements PostSearchService {
     @Cacheable(value="getProducts")
     @Override
     public List<PostDTO> getProducts(PostDTO productDTO, CategoryDTO categoryDTO) {
-        log.info("PostSearchServiceImpl.getProducts 실행");
-
         productDTO.setCategoryId(categoryDTO.getId());
         List<PostDTO> postDTOList = productSearchMapper.selectPosts(productDTO,categoryDTO);
         return postDTOList;
