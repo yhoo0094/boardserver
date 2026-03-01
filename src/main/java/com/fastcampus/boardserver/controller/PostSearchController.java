@@ -2,14 +2,13 @@ package com.fastcampus.boardserver.controller;
 
 import com.fastcampus.boardserver.dto.CategoryDTO;
 import com.fastcampus.boardserver.dto.PostDTO;
+import com.fastcampus.boardserver.dto.request.PostSearchRequest;
 import com.fastcampus.boardserver.service.impl.PostSearchServiceImpl;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +23,13 @@ public class PostSearchController {
     @GetMapping
     public PostSearchResponse search(PostDTO postDTO, CategoryDTO categoryDTO) {
         List<PostDTO> postDTOList = postSearchService.getProducts(postDTO,categoryDTO);
+        return new PostSearchResponse(postDTOList);
+    }
+
+    @PostMapping
+    public PostSearchResponse search(@RequestBody PostSearchRequest postSearchRequest) {
+        List<PostDTO> postDTOList = postSearchService.getPosts(postSearchRequest);
+
         return new PostSearchResponse(postDTOList);
     }
 
